@@ -29,6 +29,21 @@ pack.commands
         @string input
         @enter()
 
+  'run-cell':
+    spoken: 'uncle'
+    description: 'Run the current cell'
+    tags: ['IDE']
+    grammarType: "textCapture"
+    action: (input) ->
+      if input
+        input = input.join(' ')
+        if input == 'bob'
+          @key 'enter', 'control'
+        else
+          @string "I don know uncle " + input
+      else
+        @key 'enter', 'shift'
+
   'debug':
     spoken: 'bugger'
     description: 'SublimeREPL: Python - Debug current file or target'
@@ -44,13 +59,20 @@ pack.commands
         @string 'continue'
         @enter()
 
+  'debug-restart':
+    spoken: 'rigger'
+    description: 'Restart the debugger'
+    tags: ['IDE', 'debug']
+    action: (input) ->
+      @key 'f5', 'command shift'
+
   'debug-breakpoint-toggle':
     spoken: 'breaker'
     description: 'open file wiith file name, function, objects, etc.'
     tags: ['IDE', 'debug']
     action: (input) ->
       @key 'b', 'control shift'
-      if value
+      if input
         @string input
 
   'debug-step-into':
@@ -165,6 +187,62 @@ pack.commands
     grammarType: 'integerCapture'
     action: (input) ->
       @key 'k', 'command'
+
+  'goto-terminal':
+    spoken: 'termie'
+    description: 'Go to the integrated terminal window'
+    tags: ['IDE', 'terminal']
+    action: (input) ->
+      @key '`', 'control'
+
+  'goto-output':
+    spoken: 'outtie'
+    description: 'Go to the output window'
+    tags: ['IDE', 'terminal']
+    action: (input) ->
+      @key 'u', 'command shift'
+
+  'goto-problems':
+    spoken: 'problemo'
+    description: 'Go to the problems window'
+    tags: ['IDE', 'problems']
+    action: (input) ->
+      @key 'm', 'command shift'
+
+  'goto-explorer':
+    spoken: 'dora'
+    description: 'Go to the project explorer window'
+    tags: ['IDE', 'goto']
+    action: (input) ->
+      @key 'e', 'command shift'
+
+  'goto-search':
+    spoken: 'susser'
+    description: 'Go to the search/find window'
+    tags: ['IDE', 'goto']
+    action: (input) ->
+      @key 'f', 'command shift'
+
+  'goto-repository':
+    spoken: 'reaper'
+    description: 'Go to the repository (git, mercurial, etc.) window'
+    tags: ['IDE', 'goto']
+    action: (input) ->
+      @key 'shift'
+
+  'goto-debug':
+    spoken: 'buggin'
+    description: 'Go to the debug information window'
+    tags: ['IDE', 'goto']
+    action: (input) ->
+      @key 'd', 'command shift'
+
+  'goto-debug-console':
+    spoken: 'buggy'
+    description: 'Go to debugging console window'
+    tags: ['IDE', 'debug']
+    action: (input) ->
+      @key 'y', 'command shift'
 
   # 'polo':
   #   description: 'find in project'
